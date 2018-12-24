@@ -1,5 +1,9 @@
 import React from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
+
+import 'semantic-ui-css/semantic.min.css';
+
+import Header from './Header';
 import StreamCreate from './streams/StreamCreate';
 import StreamEdit from './streams/StreamEdit';
 import StreamDelete from './streams/StreamDelete';
@@ -12,6 +16,7 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <div>
+            <Header />
             <Route path="/" exact component={StreamList} />
             <Route path="/streams/new" exact component={StreamCreate} />
             <Route path="/streams/edit" exact component={StreamEdit} />
