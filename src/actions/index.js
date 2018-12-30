@@ -1,5 +1,5 @@
 import streams from '../apis/streams';
-import { CREATE_STREAM, EDIT_STREAM, FETCH_STREAM, FETCH_STREAMS, SIGN_IN, SIGN_OUT, DELETE_STREAM } from './types';
+import { CREATE_STREAM, DELETE_STREAM, EDIT_STREAM, FETCH_STREAM, FETCH_STREAMS, SIGN_IN, SIGN_OUT } from './types';
 
 export const signIn = userId => {
   return {
@@ -14,6 +14,7 @@ export const signOut = () => {
   };
 };
 
+// uses standard thunk function return
 export const createStream = formValues => {
   return async dispatch => {
     const response = await streams.post('/streams', formValues);
@@ -22,16 +23,11 @@ export const createStream = formValues => {
   };
 };
 
-export const fetchStreams = () => async dispatch => {
-  const response = await streams.get('/streams');
+// uses shortened thunk function return
+export const deleteStream = id => async dispatch => {
+  await streams.delete(`/streams/${id}`);
 
-  dispatch({ type: FETCH_STREAMS, payload: response.data });
-};
-
-export const fetchStream = id => async dispatch => {
-  const response = await streams.get(`/streams/${id}`);
-
-  dispatch({ type: FETCH_STREAM, payload: response.data });
+  dispatch({ type: DELETE_STREAM, payload: id });
 };
 
 export const editStream = (id, formValues) => async dispatch => {
@@ -40,8 +36,14 @@ export const editStream = (id, formValues) => async dispatch => {
   dispatch({ type: EDIT_STREAM, payload: response.data });
 };
 
-export const deleteStream = id => async dispatch => {
-  await streams.delete(`/streams/${id}`);
+export const fetchStream = id => async dispatch => {
+  const response = await streams.get(`/streams/${id}`);
 
-  dispatch({ type: DELETE_STREAM, payload: id });
+  dispatch({ type: FETCH_STREAM, payload: response.data });
+};
+
+export const fetchStreams = () => async dispatch => {
+  const response = await streams.get('/streams');
+
+  dispatch({ type: FETCH_STREAMS, payload: response.data });
 };
