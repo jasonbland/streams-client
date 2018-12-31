@@ -1,4 +1,5 @@
 import streams from '../apis/streams';
+import history from '../history';
 import { CREATE_STREAM, DELETE_STREAM, EDIT_STREAM, FETCH_STREAM, FETCH_STREAMS, SIGN_IN, SIGN_OUT } from './types';
 
 export const signIn = userId => {
@@ -21,6 +22,7 @@ export const createStream = formValues => {
     const response = await streams.post('/streams', { ...formValues, userId });
 
     dispatch({ type: CREATE_STREAM, payload: response.data });
+    history.push('/');
   };
 };
 
