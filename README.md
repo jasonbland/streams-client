@@ -1,7 +1,7 @@
 streams-client
 ============
 
-This is a Twitch clone using React and Redux which allows for creating accounts and creating, editing, and deleting video streams.
+This is a simple Twitch clone using React and Redux which allows for creating accounts and creating, editing, and deleting video streams.
 
 
 ## Features
